@@ -11,10 +11,50 @@ function kill_beta_dd() {
 	open -a Xcode-beta
 }
 
+function myip() {
+	dig +short myip.opendns.com @resolver1.opendns.com
+}
+
+function list_ssh_tunnels() {
+	ps -ax | grep 'ssh -L' | grep -v 'grep'
+}
+
+function docker_cleanup() {
+	kubectl delete po $(kubectl get po --no-headers -n=docker | awk '{print $1}') -n=docker
+	kubectl delete po $(kubectl get po --no-headers -n=kube-system | awk '{print $1}') -n=kube-system
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
+	docker rmi $(docker images -a -q)
+	docker network rm $(docker network ls -q)
+}
+
 function dump_apk_header() {
 	BUILD_TOOL="$(ls -tU $ANDROID_HOME/build-tools | head -1)"
 	APK_PATH="$1"
 	"$ANDROID_HOME/build-tools/$BUILD_TOOL/aapt2" dump badging $APK_PATH
+}
+
+function create_bitrise_app() {
+	BITRISE_API_TOKEN=""
+	BITRISE_ORGANIZATION_ID=""
+
+	while [ -n "$1" ]; do
+		case "$1" in
+			--api_token | -a) BITRISE_API_TOKEN="$2" && shift ;;
+			--organization_id | -o) BITRISE_ORGANIZATION_ID="$2" && shift ;;
+		esac
+		shift
+	done
+
+	if [ -z "$BITRISE_API_TOKEN" ]; then
+		BITRISE_API_TOKEN="G65x3ENhcfCe_RP_4rBNqsaUZvhOu6rN_zUv8oloIhDC51GFwsVqJaWUe85UdohWImReeqyCKpv_VxlkFtJrLA"
+	fi
+
+	if [ -z "$BITRISE_ORGANIZATION_ID" ]; then
+		BITRISE_ORGANIZATION_ID="1b1073b2897368ac"
+	fi
+
+	bash <(curl -sfL "https://raw.githubusercontent.com/bitrise-io/bitrise-add-new-project/master/_scripts/run.sh") --api-token "$BITRISE_API_TOKEN" --org "$BITRISE_ORGANIZATION_ID" --public "false" --website
 }
 
 # Looks for the app of an Application
@@ -24,6 +64,23 @@ function path_for_app() {
 	${PATH_LAUNCHSERVICES} -dump | grep -o "/.*${NAME_APP}.app" | grep -v -E "Caches|TimeMachine|Temporary|/Volumes/${NAME_APP}" | uniq
 }
 
+function copy_branch_content() {
+	FROM=$1
+	TO=$2
+	BASED=$3
+
+	if [ -z "$BASED" ]; then
+		BASED="master"
+	fi
+
+	git checkout "$TO"
+	git checkout -b "cherry_pick/$FROM/$TO"
+	git cherry-pick "$BASED".."$TO"
+}
+
+function list_open_ports() {
+	netstat -Watnlv | grep LISTEN | awk '{"ps -o comm= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
+}
 
 function launch_freeswtich() {
 	/usr/local/freeswitch/bin/freeswitch
