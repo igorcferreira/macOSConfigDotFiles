@@ -1,5 +1,6 @@
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export GOPATH="${HOME}/.go"
+export GOBIN="${GOPATH}/bin"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="$PATH:$ANDROID_HOME/emulator"
@@ -28,5 +29,6 @@ if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export GPG_TTY=$(tty)
+eval $(thefuck --alias)
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
