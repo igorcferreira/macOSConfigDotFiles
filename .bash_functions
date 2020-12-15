@@ -28,6 +28,23 @@ function docker_cleanup() {
 	docker network rm $(docker network ls -q)
 }
 
+func export_code_plugin_list() {
+	OUTPUT_FILE="$1"
+
+	EXPORT_COMMAND="code --list-extensions | xargs -L 1 echo code --install-extension"
+
+	if [[ -f "$OUTPUT_FILE" ]]; then
+		rm "$OUTPUT_FILE"
+	fi
+
+	sh -c "$EXPORT_COMMAND" > "$OUTPUT_FILE"
+}
+
+function rsanewkeypair() {
+	openssl genrsa -out privatekey.pem 2048 && \
+	openssl rsa -in privatekey.pem -outform PEM -pubout -out publickey.pem
+}
+
 function dump_apk_header() {
 	BUILD_TOOL="$(ls -tU $ANDROID_HOME/build-tools | head -1)"
 	APK_PATH="$1"
@@ -208,6 +225,10 @@ function move_repo() {
 	done
 }
 
+function switch_java_8() {
+	export JAVA_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
+}
+
 # This method runs the git clone, and already updates all submodules
 function git_clone_submodules() {
 	git clone "$@"
@@ -220,9 +241,9 @@ function open_avd_emulator() {
 		echo "Usage: $0 <Emulator name>"
 		echo "You can run 'emulator -list-avds' to check the installed emulators."
 		echo "Current emulators available:"
-		emulator -list-avds
+		$ANDROID_HOME/emulator -list-avds
 		return 1
 	fi
 
-	$ANDROID_HOME/tools/emulator -avd "$1"
+	$ANDROID_HOME/emulator -avd "$1"
 }
