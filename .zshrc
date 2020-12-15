@@ -64,7 +64,7 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git ruby brew aws osx docker gpg-agent git-flow github gradle heroku xcode)
 
-source $ZSH/oh-my-zsh.sh
+[[ -s "$ZSH/oh-my-zsh.sh" ]] && source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -105,3 +105,5 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
