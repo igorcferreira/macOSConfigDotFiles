@@ -17,6 +17,7 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 export XCODE_CONTENT="/Applications/Xcode.app/Contents"
 export DEVELOPER_DIR="$XCODE_CONTENT/Developer"
 export JAVA_HOME=`/usr/libexec/java_home`
+export GEM_HOME="$HOME/.gem"
 
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias symbolicatecrash="$XCODE_CONTENT/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash"
