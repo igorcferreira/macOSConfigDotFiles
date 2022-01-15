@@ -243,9 +243,9 @@ function open_avd_emulator() {
 		echo "Usage: $0 <Emulator name>"
 		echo "You can run 'emulator -list-avds' to check the installed emulators."
 		echo "Current emulators available:"
-		$ANDROID_HOME/emulator -list-avds
+		$ANDROID_HOME/emulator/emulator -list-avds
 		return 1
 	fi
 
-	$ANDROID_HOME/emulator -avd "$1"
+	$ANDROID_HOME/emulator/emulator -avd "$1"
 }

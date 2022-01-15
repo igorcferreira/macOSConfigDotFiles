@@ -1,3 +1,7 @@
+# These variables are configured for a default M1 mac. If these need to be overwritten on your machine, create a `~/.local.env` file with the values to be overwritten
+BREW_PATH="/opt/homebrew"
+BREW_BIN_PATH="${BREW_PATH}/bin"
+
 [[ -s "$HOME/.local.env" ]] && source "$HOME/.local.env"
 
 # ssh
