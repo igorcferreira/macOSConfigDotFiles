@@ -1,3 +1,6 @@
+[alias]
+	adog = log --all --decorate --oneline --graph
+	delete-local-tags = !echo 'git tag -l | xargs git tag -d && git fetch --tags' && git tag -l | xargs git tag -d && git fetch --tags
 [pull]
 	ff = only
 [init]
