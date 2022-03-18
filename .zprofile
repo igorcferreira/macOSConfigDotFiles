@@ -27,7 +27,7 @@ export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
 # Go configuration
 export GOPATH="${HOME}/.go"
 export GOBIN="${GOPATH}/bin"
-export GOROOT="/opt/homebrew/opt/go/libexec"
+export GOROOT="${BREW_PATH}/opt/go/libexec"
 export PATH="$PATH:$GOBIN"
 
 # Xcode configuration
@@ -45,7 +45,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "${BREW_PATH}/opt/nvm/etc/bash_completion.d/nvm" ] && \. "${BREW_PATH}/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Rbenv configuration
-eval "$($BREW_BIN_PATH/rbenv init - zsh)"
+[ -s "${BREW_PATH}/rbenv" ] && eval "$($BREW_BIN_PATH/rbenv init - zsh)"
 
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
