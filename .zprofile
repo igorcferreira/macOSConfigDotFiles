@@ -48,7 +48,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "${BREW_PATH}/opt/nvm/etc/bash_completion.d/nvm" ] && \. "${BREW_PATH}/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Rbenv configuration
-[ -s "${BREW_PATH}/rbenv" ] && eval "$($BREW_BIN_PATH/rbenv init - zsh)"
+[ -s "${BREW_BIN_PATH}/rbenv" ] && eval "$($BREW_BIN_PATH/rbenv init - zsh)"
 
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
