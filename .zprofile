@@ -35,6 +35,9 @@ export XCODE_CONTENT="/Applications/Xcode.app/Contents"
 export DEVELOPER_DIR="$XCODE_CONTENT/Developer"
 alias symbolicatecrash="$XCODE_CONTENT/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash"
 
+# Airport
+alias airport="sudo /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport"
+
 # Ruby configuration
 export RUBY_CFLAGS="-Wno-error=implicit-function-declaration"
 export GEM_HOME="$HOME/.gem"
