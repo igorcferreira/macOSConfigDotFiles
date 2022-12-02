@@ -275,7 +275,7 @@ function generate_image() {
 		mkdir "$OUTPUT"
 	fi
 
-	swift run StableDiffusionSample \
+	stablediffusion \
 	--resource-path "${RESOURCES}" \
 	--seed "$(cat /dev/urandom | LC_ALL=C tr -dc '0-9' | fold -w 8 | sed 1q)" \
 	--disable-safety \
