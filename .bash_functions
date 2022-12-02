@@ -249,3 +249,28 @@ function open_avd_emulator() {
 
 	$ANDROID_HOME/emulator/emulator -avd "$1"
 }
+
+function generate_image() {
+	RESOURCES="$(pwd)/models/Resources"
+	OUTPUT="$(pwd)/output"
+	IMAGE_COUNT=5
+	COMMAND=""
+
+	while [ -n "$1" ]; do
+		case "$1" in
+			--image-count | -c) IMAGE_COUNT="$2" && shift ;;
+			--resource-path | -r) RESOURCES="$2" && shift ;;
+			--output-path | -o) OUTPUT="$2" && shift ;;
+			--input | -i) COMMAND="$2" && shift ;;
+		esac
+		shift
+	done
+
+	swift run StableDiffusionSample \
+	--resource-path "${RESOURCES}" \
+	--seed "$(cat /dev/urandom | LC_ALL=C tr -dc '0-9' | fold -w 8 | sed 1q)" \
+	--disable-safety \
+	--output-path "${OUTPUT}" \
+	--image-count $IMAGE_COUNT  \
+	"${COMMAND}"
+}
