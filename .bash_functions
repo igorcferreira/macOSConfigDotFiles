@@ -253,7 +253,7 @@ function open_avd_emulator() {
 function generate_image() {
 	RESOURCES="$(pwd)/models/Resources"
 	OUTPUT="$(pwd)/output"
-	IMAGE_COUNT=5
+	IMAGE_COUNT=1
 	COMMAND=""
 
 	while [ -n "$1" ]; do
@@ -265,6 +265,15 @@ function generate_image() {
 		esac
 		shift
 	done
+
+	if [ ! -d "$OUTPUT" ]; then
+		echo "Resources not available at path ${RESOURCES}"
+		exit 1
+	fi
+
+	if [ ! -d "$OUTPUT" ]; then
+		mkdir "$OUTPUT"
+	fi
 
 	swift run StableDiffusionSample \
 	--resource-path "${RESOURCES}" \
