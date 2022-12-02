@@ -266,7 +266,7 @@ function generate_image() {
 		shift
 	done
 
-	if [ ! -d "$OUTPUT" ]; then
+	if [ ! -d "$RESOURCES" ]; then
 		echo "Resources not available at path ${RESOURCES}"
 		exit 1
 	fi
