@@ -283,3 +283,46 @@ function generate_image() {
 	--image-count $IMAGE_COUNT  \
 	"${COMMAND}"
 }
+
+function update_ddns() {
+	HOSTNAME=""
+	IP=""
+	NO_IPUSERNAME=""
+	NO_IPPASSWORD=""
+	DDNS_ENDPOINT="dynupdate.no-ip.com"
+
+	while [ -n "$1" ]; do
+		case "$1" in
+			--user | -u) NO_IPUSERNAME="$2" && shift ;;
+			--password | -p) NO_IPPASSWORD="$2" && shift ;;
+			--hostname | -h) HOSTNAME="$2" && shift ;;
+			--ip | -ip) IP="$2" && shift ;;
+			--endpoint) DDNS_ENDPOINT="$2" && shift ;;
+		esac
+		shift
+	done
+
+	if [[ -z "${NO_IPUSERNAME}" || -z "${NO_IPPASSWORD}" ]]; then
+		echo "Usage: $0 --hostname '<Domain to be updated>' --user '<DDNS acccount username>' --password '<DDNS acccount password>'"
+		echo "Please, inform the DDNS account username and password"
+		return 1
+	fi
+
+	if [ -z "${HOSTNAME}" ]; then
+		echo "Usage: $0 --hostname '<Domain to be updated>' --user '<DDNS acccount username>' --password '<DDNS acccount password>'"
+		echo "Please, inform the domain that should be updated"
+		return 1
+	fi
+
+	if [ -z "$IP" ]; then
+		if which myip > /dev/null; then
+			IP="$(myip)"
+		else
+			echo "Usage: $0 --hostname '<Domain to be updated>' --ip '<Public IP>' --user '<DDNS acccount username>' --password '<DDNS acccount password>'"
+			echo "Please, inform the public IP that should be updated"
+			return 1
+		fi
+	fi
+
+	curl -i "https://${DDNS_ENDPOINT}/nic/update?hostname=${HOSTNAME}&myip=${IP}" -H "Host: ${DDNS_ENDPOINT}" -H "Authorization: Basic $(echo -n "${NO_IPUSERNAME}:${NO_IPPASSWORD}" | openssl base64)"
+}
