@@ -317,12 +317,12 @@ function update_ddns() {
 	if [ -z "$IP" ]; then
 		if which myip > /dev/null; then
 			IP="$(myip)"
-		else
-			echo "Usage: $0 --hostname '<Domain to be updated>' --ip '<Public IP>' --user '<DDNS acccount username>' --password '<DDNS acccount password>'"
-			echo "Please, inform the public IP that should be updated"
-			return 1
 		fi
 	fi
 
-	curl -i "https://${DDNS_ENDPOINT}/nic/update?hostname=${HOSTNAME}&myip=${IP}" -H "Host: ${DDNS_ENDPOINT}" -H "Authorization: Basic $(echo -n "${NO_IPUSERNAME}:${NO_IPPASSWORD}" | openssl base64)"
+	if [ -z "$IP" ]; then
+		curl -i "https://${DDNS_ENDPOINT}/nic/update?hostname=${HOSTNAME}" -H "Host: ${DDNS_ENDPOINT}" -H "Authorization: Basic $(echo -n "${NO_IPUSERNAME}:${NO_IPPASSWORD}" | openssl base64)"
+	else
+		curl -i "https://${DDNS_ENDPOINT}/nic/update?hostname=${HOSTNAME}&myip=${IP}" -H "Host: ${DDNS_ENDPOINT}" -H "Authorization: Basic $(echo -n "${NO_IPUSERNAME}:${NO_IPPASSWORD}" | openssl base64)"
+	fi
 }
