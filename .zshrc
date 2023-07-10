@@ -62,7 +62,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby brew aws macos docker gpg-agent git-flow git-lfs history node postgres rvm vscode sublime github gradle heroku xcode gem)
+plugins=(git ruby brew aws macos docker gpg-agent git-flow git-lfs history node postgres rvm vscode sublime github gradle heroku xcode gem rails adb bundler)
 
 [[ -s "$ZSH/oh-my-zsh.sh" ]] && source $ZSH/oh-my-zsh.sh
 
@@ -81,7 +81,7 @@ export LANG=en_US.UTF-8
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch arm64"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
