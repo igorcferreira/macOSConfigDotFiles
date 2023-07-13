@@ -326,3 +326,44 @@ function update_ddns() {
 		curl -i "https://${DDNS_ENDPOINT}/nic/update?hostname=${HOSTNAME}&myip=${IP}" -H "Host: ${DDNS_ENDPOINT}" -H "Authorization: Basic $(echo -n "${NO_IPUSERNAME}:${NO_IPPASSWORD}" | openssl base64)"
 	fi
 }
+
+function remove_alpha() {
+	RUN_PATH="$1"
+
+	if [ -z "${RUN_PATH}" ]; then
+		echo "Please, inform the image path"
+		return 1
+	fi
+
+	if which convert > /dev/null; then; else
+		if which brew > /dev/null; then
+			echo "Installing imagemagick"
+			brew install imagemagick
+		else
+			echo "Please install imagemagick before running this command"
+			return 1
+		fi
+	fi
+
+	if ! `identify -format '%[opaque]' "${RUN_PATH}"`; then
+		echo "Converting ${RUN_PATH}";
+		convert "${RUN_PATH}" -alpha remove -alpha off "${RUN_PATH}";
+	else
+		echo "No alpha on ${RUN_PATH}"
+	fi
+}
+
+function remove_alpha_images() {
+	RUN_PATH="$1"
+
+	if [ -z "${RUN_PATH}" ]; then
+		echo "Please, inform the path to the directory where the images are stored"
+		return 1
+	fi
+
+	LOCAL_FILES="$(find "${RUN_PATH}" -type f -name '*.png')"
+
+	for f in $RUN_PATH/**/*.png; do
+		remove_alpha "$f"
+	done
+}
