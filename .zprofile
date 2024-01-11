@@ -68,6 +68,11 @@ alias pip="pip3"
 # Openssl
 export PATH="${BREW_PATH}/opt/openssl@1.1/bin:$PATH"
 
+# Direnv
+eval "$(direnv hook zsh)"
+
+alias studio="/Applications/Android\ Studio.app/Contents/MacOS/studio"
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
