@@ -231,6 +231,10 @@ function switch_java_17() {
 	export JAVA_HOME="$(/usr/libexec/java_home -v17)"
 }
 
+function switch_java_21() {
+	export JAVA_HOME="$(/usr/libexec/java_home -v21)"
+}
+
 function switch_java_latest() {
 	export JAVA_HOME="$(/usr/libexec/java_home)"
 }

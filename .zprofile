@@ -8,7 +8,7 @@ BREW_BIN_PATH="${BREW_PATH}/bin"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 # Java configuration
-export JAVA_HOME="$(/usr/libexec/java_home -v11)"
+export JAVA_HOME="$(/usr/libexec/java_home)"
 
 # Local scripts
 [[ -d "$HOME/Developer/bin" ]] && export PATH="$PATH:$HOME/Developer/bin" # Loads local scripts to be used on Bash
@@ -61,6 +61,9 @@ if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 # GPG
 export GPG_TTY=$(tty)
 
+# Mono
+export MONO_GAC_PREFIX="${BREW_PATH}"
+
 # Python
 alias python="python3"
 alias pip="pip3"
@@ -72,7 +75,9 @@ export PATH="${BREW_PATH}/opt/openssl@1.1/bin:$PATH"
 eval "$(direnv hook zsh)"
 
 alias studio="/Applications/Android\ Studio.app/Contents/MacOS/studio"
+alias idea="/Applications/IntelliJ\ IDEA.app/Contents/MacOS/idea"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+[[ -s "$BREW_PATH/opt/autoenv/activate.sh" ]] && source "$BREW_PATH/opt/autoenv/activate.sh"
