@@ -74,8 +74,9 @@ export PATH="${BREW_PATH}/opt/openssl@1.1/bin:$PATH"
 # Direnv
 eval "$(direnv hook zsh)"
 
-alias studio="/Applications/Android\ Studio.app/Contents/MacOS/studio"
-alias idea="/Applications/IntelliJ\ IDEA.app/Contents/MacOS/idea"
+#Android Studio
+export PATH="/Applications/Android Studio.app/Contents/MacOS:$PATH"
+export PATH="/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin"
