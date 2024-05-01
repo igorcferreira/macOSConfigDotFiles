@@ -15,6 +15,8 @@ export JAVA_HOME="$(/usr/libexec/java_home)"
 [[ -s "$HOME/.bash_profile" ]] && source "$HOME/.bash_profile" # Loads old bash_profile if exists, to ensure outdated scripts works fine
 [[ -s "$HOME/.bash_functions" ]] && source "$HOME/.bash_functions" # Loads a set of functions that can be useful
 
+# SPM executables
+[[ -d "$HOME/.swiftpm/bin" ]] && export PATH="$PATH:$HOME/.swiftpm/bin"
 
 # Android configuration
 export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -81,4 +83,3 @@ export PATH="/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-[[ -s "$BREW_PATH/opt/autoenv/activate.sh" ]] && source "$BREW_PATH/opt/autoenv/activate.sh"

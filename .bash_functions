@@ -375,3 +375,9 @@ function remove_alpha_images() {
 		remove_alpha "$f"
 	done
 }
+
+function autoenv() {
+	BREW_PATH="/opt/homebrew"
+	# Autoenv
+	[[ -s "$BREW_PATH/opt/autoenv/activate.sh" ]] && source "$BREW_PATH/opt/autoenv/activate.sh"
+}
