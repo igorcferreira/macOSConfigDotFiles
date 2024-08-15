@@ -8,7 +8,7 @@ BREW_BIN_PATH="${BREW_PATH}/bin"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 # Java configuration
-export JAVA_HOME="$(/usr/libexec/java_home -v17)"
+export JAVA_HOME="$(/usr/libexec/java_home -v21)"
 
 # Local scripts
 [[ -d "$HOME/Developer/bin" ]] && export PATH="$PATH:$HOME/Developer/bin" # Loads local scripts to be used on Bash
