@@ -381,3 +381,18 @@ function autoenv() {
 	# Autoenv
 	[[ -s "$BREW_PATH/opt/autoenv/activate.sh" ]] && source "$BREW_PATH/opt/autoenv/activate.sh"
 }
+
+function ssh_forward() {
+	SERVER=""
+	PORT=""
+
+	while [ -n "$1" ]; do
+		case "$1" in
+			--server | -s) SERVER="$2" && shift ;;
+			--port | -p) PORT="$2" && shift ;;
+		esac
+		shift
+	done
+
+	ssh -L "${PORT}:127.0.0.1:${PORT}" -N -f "${SERVER}"
+}
