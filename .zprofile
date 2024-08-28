@@ -8,7 +8,7 @@ BREW_BIN_PATH="${BREW_PATH}/bin"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 # Java configuration
-export JAVA_HOME="$(/usr/libexec/java_home)"
+export JAVA_HOME="$(/usr/libexec/java_home -v17)"
 
 # Local scripts
 [[ -d "$HOME/Developer/bin" ]] && export PATH="$PATH:$HOME/Developer/bin" # Loads local scripts to be used on Bash
@@ -78,7 +78,17 @@ eval "$(direnv hook zsh)"
 
 #Android Studio
 export PATH="/Applications/Android Studio.app/Contents/MacOS:$PATH"
-export PATH="/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH"
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
+
+# Azure CLI autocomplete
+autoload bashcompinit && bashcompinit
+source $(brew --prefix)/etc/bash_completion.d/az
+
+# SPM
+export PATH="$PATH:$HOME/.swiftpm/bin"
+
+# Ruby
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin"
