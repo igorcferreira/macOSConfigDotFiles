@@ -76,6 +76,9 @@ export PATH="${BREW_PATH}/opt/openssl@1.1/bin:$PATH"
 # Direnv
 eval "$(direnv hook zsh)"
 
+# Language set
+export LC_ALL=en_US.UTF-8
+
 #Android Studio
 export PATH="/Applications/Android Studio.app/Contents/MacOS:$PATH"
 export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
