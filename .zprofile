@@ -85,7 +85,7 @@ export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 
 # Azure CLI autocomplete
 autoload bashcompinit && bashcompinit
-source $(brew --prefix)/etc/bash_completion.d/az
+[[ -s "$(brew --prefix)/etc/bash_completion.d/az" ]] && source "$(brew --prefix)/etc/bash_completion.d/az"
 
 # SPM
 export PATH="$PATH:$HOME/.swiftpm/bin"
