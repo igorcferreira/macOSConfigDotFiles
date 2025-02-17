@@ -90,6 +90,10 @@ autoload bashcompinit && bashcompinit
 # SPM
 export PATH="$PATH:$HOME/.swiftpm/bin"
 
+[[ -d "${BREW_PATH}/opt/libffi" ]] export LDFLAGS="-L$(brew --prefix libffi)/lib"
+[[ -d "${BREW_PATH}/opt/libffi" ]] export CPPFLAGS="-I$(brew --prefix libffi)/include"
+[[ -d "${BREW_PATH}/opt/libffi" ]] export PKG_CONFIG_PATH="$(brew --prefix libffi)/lib/pkgconfig"
+
 # Ruby
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 

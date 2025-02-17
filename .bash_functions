@@ -30,7 +30,7 @@ function docker_cleanup() {
 	docker network rm $(docker network ls -q)
 }
 
-func export_code_plugin_list() {
+function export_code_plugin_list() {
 	OUTPUT_FILE="$1"
 
 	EXPORT_COMMAND="code --list-extensions | xargs -L 1 echo code --install-extension"
@@ -395,4 +395,26 @@ function ssh_forward() {
 	done
 
 	ssh -L "${PORT}:127.0.0.1:${PORT}" -N -f "${SERVER}"
+}
+
+function install_ruby() {
+	RUBY_VERSION="$1"
+
+	if which rvm > /dev/null; then; else
+		echo "RVM not installed"
+		return 1
+	fi
+
+	if which ruby-build > /dev/null; then; else
+		if which brew > /dev/null; then
+			echo "Installing ruby-build"
+			brew install ruby-build
+		else
+			echo "Unable to install ruby-build"
+			return 1
+		fi
+	fi
+
+	ruby-build "$RUBY_VERSION" "$HOME/.rvm/rubies/ruby-$RUBY_VERSION"
+	rvm install "ruby-$RUBY_VERSION" --create
 }
