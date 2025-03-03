@@ -8,7 +8,7 @@ BREW_BIN_PATH="${BREW_PATH}/bin"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 # Java configuration
-export JAVA_HOME="$(/usr/libexec/java_home -v21)"
+export JAVA_HOME="$(/usr/libexec/java_home -v17)"
 
 # Local scripts
 [[ -d "$HOME/Developer/bin" ]] && export PATH="$PATH:$HOME/Developer/bin" # Loads local scripts to be used on Bash
@@ -89,9 +89,9 @@ autoload bashcompinit && bashcompinit
 # SPM
 export PATH="$PATH:$HOME/.swiftpm/bin"
 
-[[ -d "${BREW_PATH}/opt/libffi" ]] && export LDFLAGS="-L$(brew --prefix libffi)/lib"
-[[ -d "${BREW_PATH}/opt/libffi" ]] && export CPPFLAGS="-I$(brew --prefix libffi)/include"
-[[ -d "${BREW_PATH}/opt/libffi" ]] && export PKG_CONFIG_PATH="$(brew --prefix libffi)/lib/pkgconfig"
+# [[ -d "${BREW_PATH}/opt/libffi" ]] && export LDFLAGS="-L$(brew --prefix libffi)/lib"
+# [[ -d "${BREW_PATH}/opt/libffi" ]] && export CPPFLAGS="-I$(brew --prefix libffi)/include"
+# [[ -d "${BREW_PATH}/opt/libffi" ]] && export PKG_CONFIG_PATH="$(brew --prefix libffi)/lib/pkgconfig"
 
 # NPM
 export PATH="$PATH:$(npm get prefix)/bin"
