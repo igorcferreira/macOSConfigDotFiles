@@ -42,7 +42,6 @@ alias airport="sudo /System/Library/PrivateFrameworks/Apple80211.framework/Resou
 
 # Ruby configuration
 export RUBY_CFLAGS="-Wno-error=implicit-function-declaration"
-export GEM_HOME="$HOME/.gem"
 
 # NVM configuration
 export NVM_DIR="$HOME/.nvm"
@@ -90,9 +89,14 @@ autoload bashcompinit && bashcompinit
 # SPM
 export PATH="$PATH:$HOME/.swiftpm/bin"
 
+<<<<<<< Updated upstream
 [[ -d "${BREW_PATH}/opt/libffi" ]] && export LDFLAGS="-L$(brew --prefix libffi)/lib"
 [[ -d "${BREW_PATH}/opt/libffi" ]] && export CPPFLAGS="-I$(brew --prefix libffi)/include"
 [[ -d "${BREW_PATH}/opt/libffi" ]] && export PKG_CONFIG_PATH="$(brew --prefix libffi)/lib/pkgconfig"
+=======
+# NPM
+export PATH="$PATH:$(npm get prefix)/bin"
+>>>>>>> Stashed changes
 
 # Ruby
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
