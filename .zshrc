@@ -93,3 +93,5 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+[[ -s "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"

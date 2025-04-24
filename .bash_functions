@@ -245,6 +245,12 @@ function git_clone_submodules() {
 	git submodule update --init --recursive
 }
 
+# Symbolicate function
+function symbolicatecrash() {
+	XCODE_CONTENT="$(xcode-select -p)"
+	DEVELOPER_DIR="$XCODE_CONTENT" "$XCODE_CONTENT/../SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash" $@
+}
+
 # This method fixes the broken call to start an android emulator
 function open_avd_emulator() {
 	if [ -z "$1" ]; then

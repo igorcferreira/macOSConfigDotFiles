@@ -8,7 +8,7 @@ BREW_BIN_PATH="${BREW_PATH}/bin"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 # Java configuration
-export JAVA_HOME="$(/usr/libexec/java_home -v17)"
+export JAVA_HOME="$(/usr/libexec/java_home -v21)"
 
 # Local scripts
 [[ -d "$HOME/Developer/bin" ]] && export PATH="$PATH:$HOME/Developer/bin" # Loads local scripts to be used on Bash
@@ -33,9 +33,9 @@ export GOROOT="${BREW_PATH}/opt/go/libexec"
 export PATH="$PATH:$GOBIN"
 
 # Xcode configuration
-export XCODE_CONTENT="/Applications/Xcode.app/Contents"
-export DEVELOPER_DIR="$XCODE_CONTENT/Developer"
-alias symbolicatecrash="$XCODE_CONTENT/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash"
+#export XCODE_CONTENT="/Applications/Xcode.app/Contents"
+#export DEVELOPER_DIR="$XCODE_CONTENT/Developer"
+#alias symbolicatecrash="$XCODE_CONTENT/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash"
 
 # Airport
 alias airport="sudo /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport"
@@ -45,8 +45,8 @@ export RUBY_CFLAGS="-Wno-error=implicit-function-declaration"
 
 # NVM configuration
 export NVM_DIR="$HOME/.nvm"
-[ -s "${BREW_PATH}/opt/nvm/nvm.sh" ] && \. "${BREW_PATH}/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "${BREW_PATH}/opt/nvm/etc/bash_completion.d/nvm" ] && \. "${BREW_PATH}/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Rbenv configuration
 [ -s "${BREW_BIN_PATH}/rbenv" ] && eval "$($BREW_BIN_PATH/rbenv init - zsh)"
@@ -100,5 +100,5 @@ export PATH="$PATH:$(npm get prefix)/bin"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-[[ -d "$HOME/.rvm/bin" ]] && export PATH="$PATH:$HOME/.rvm/bin"
+[[ -d "$HOME/.rvm/bin" ]] && export PATH="$HOME/.rvm/bin:$PATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
