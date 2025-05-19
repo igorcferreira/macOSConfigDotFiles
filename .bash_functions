@@ -424,3 +424,36 @@ function install_ruby() {
 	ruby-build "$RUBY_VERSION" "$HOME/.rvm/rubies/ruby-$RUBY_VERSION"
 	rvm install "ruby-$RUBY_VERSION" --create
 }
+
+function start_colima() {
+	MEMORY="8"
+	CPUS="8"
+
+	while [ -n "$1" ]; do
+		case "$1" in
+			--memory | -m) MEMORY="$2" && shift ;;
+			--cpu | -c) CPUS="$2" && shift ;;
+		esac
+		shift
+	done
+
+	colima start -m ${MEMORY} -c ${CPUS} --arch aarch64 --vm-type=vz --vz-rosetta
+}
+
+function recreate_colima() {
+	MEMORY="8"
+	CPUS="8"
+
+	while [ -n "$1" ]; do
+		case "$1" in
+			--memory | -m) MEMORY="$2" && shift ;;
+			--cpu | -c) CPUS="$2" && shift ;;
+		esac
+		shift
+	done
+
+	colima stop
+	y | colima delete
+	y | colima prune
+	colima start -m ${MEMORY} -c ${CPUS} --arch aarch64 --vm-type=vz --vz-rosetta
+}
