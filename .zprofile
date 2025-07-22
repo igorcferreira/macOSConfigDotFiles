@@ -25,6 +25,7 @@ export PATH="$PATH:$ANDROID_HOME/emulator"
 export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+export PATH="$PATH:$ANDROID_HOME/build-tools/$(ls -1 $ANDROID_HOME/build-tools | sort -r | head -n 1)"
 
 # Go configuration
 export GOPATH="${HOME}/.go"
