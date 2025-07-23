@@ -440,6 +440,75 @@ function start_colima() {
 	colima start -m ${MEMORY} -c ${CPUS} --arch aarch64 --vm-type=vz --vz-rosetta
 }
 
+function convert_alac() {
+	FILE="$1"
+
+	if [ -z "${FILE}" ]; then
+		echo "Please inform the original audio file"
+		return 1
+	fi
+
+	if [ ! -f "${FILE}" ]; then
+		echo "File does not exists"
+		return 1
+	fi
+
+	if which ffmpeg > /dev/null; then; else
+		if which brew > /dev/null; then
+			echo "Installing ffmpeg"
+			brew install ffmpeg
+		else
+			echo "Unable to install ffmpeg"
+			return 1
+		fi
+	fi
+
+	echo "Converting \"$file\""
+	ffmpeg -i "$FILE" -acodec alac -vcodec copy "`basename "$FILE" .flac`.m4a"
+}
+
+function convert_flac_dir_alac() {
+	DIRECTORY="$1"
+
+	if [ -z "${DIRECTORY}" ]; then
+		echo "Please inform the directory"
+		return 1
+	fi
+
+	if [ ! -d "${DIRECTORY}" ]; then
+		echo "Directory does not exists"
+		return 1
+	fi
+
+	for file in "${DIRECTORY}"/*.flac; do
+		convert_alac "$file"
+	done
+}
+
+function prepare_flac_dir_music() {
+	DIRECTORY="$1"
+
+	if [ -z "${DIRECTORY}" ]; then
+		echo "Please inform the directory with -d"
+		return 1
+	fi
+
+	if [ ! -d "${DIRECTORY}" ]; then
+		echo "Directory does not exists"
+		return 1
+	fi
+
+	DESTINATION="`basename "$DIRECTORY"`"
+
+	mkdir "${DESTINATION}"
+
+	if [ -f "${DIRECTORY}/cover.jpg" ]; then
+		cp "${DIRECTORY}/cover.jpg" "${DESTINATION}/cover.jpg"
+	fi
+
+	(cd "${DESTINATION}" ; convert_flac_dir_alac "${DIRECTORY}")
+}
+
 function recreate_colima() {
 	MEMORY="8"
 	CPUS="8"
