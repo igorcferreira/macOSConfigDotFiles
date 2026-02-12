@@ -103,3 +103,9 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d "$HOME/.rvm/bin" ]] && export PATH="$HOME/.rvm/bin:$PATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Added by swiftly
+. "$HOME/.swiftly/env.sh"
+
+# Disable Azure Telemetry
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT='true'

@@ -489,7 +489,7 @@ function prepare_flac_dir_music() {
 	DIRECTORY="$1"
 
 	if [ -z "${DIRECTORY}" ]; then
-		echo "Please inform the directory with -d"
+		echo "Please inform the directory"
 		return 1
 	fi
 

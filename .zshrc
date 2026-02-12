@@ -95,3 +95,5 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [[ -s "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+test -e $HOME/.iterm2_shell_integration.zsh && source $HOME/.iterm2_shell_integration.zsh || true
