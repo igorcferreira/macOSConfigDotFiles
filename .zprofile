@@ -109,3 +109,6 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 # Disable Azure Telemetry
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT='true'
+export GH_TELEMETRY=false
+export DO_NOT_TRACK=true
+
