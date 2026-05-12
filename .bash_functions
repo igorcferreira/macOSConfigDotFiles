@@ -53,21 +53,6 @@ function dump_apk_header() {
 	"$ANDROID_HOME/build-tools/$BUILD_TOOL/aapt2" dump badging $APK_PATH
 }
 
-function create_bitrise_app() {
-	BITRISE_API_TOKEN=""
-	BITRISE_ORGANIZATION_ID=""
-
-	while [ -n "$1" ]; do
-		case "$1" in
-			--api_token | -a) BITRISE_API_TOKEN="$2" && shift ;;
-			--organization_id | -o) BITRISE_ORGANIZATION_ID="$2" && shift ;;
-		esac
-		shift
-	done
-
-	bash <(curl -sfL "https://raw.githubusercontent.com/bitrise-io/bitrise-add-new-project/master/_scripts/run.sh") --api-token "$BITRISE_API_TOKEN" --org "$BITRISE_ORGANIZATION_ID" --public "false" --website
-}
-
 # Looks for the app of an Application
 function path_for_app() {
 	NAME_APP=$1
